@@ -4,6 +4,7 @@ on:
   schedule:
     - cron: '30 2 * * *'  # 毎日 11:30 AM (JST) に通知
     - cron: '30 8 * * *'  # 毎日 5:30 PM (JST) に通知
+    - cron: '47 8 * * *'  # 毎日 17:47 PM (JST) に通知を追加
   workflow_dispatch:  # 手動で実行するオプション（オプション）
 
 jobs:
@@ -26,4 +27,10 @@ jobs:
         run: |
           curl -X POST -H "Content-Type: application/json" \
           -d '{"content": "<@737309371687763998> 11:30 AM の定期通知です。確認してください。"}' \
+          ${{ secrets.DISCORD_WEBHOOK_URL }}
+
+      - name: Send message to Discord at 17:47 PM JST
+        run: |
+          curl -X POST -H "Content-Type: application/json" \
+          -d '{"content": "17:47 PM の定期通知です。"}' \
           ${{ secrets.DISCORD_WEBHOOK_URL }}
