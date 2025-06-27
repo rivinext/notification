@@ -1,16 +1,24 @@
-name: Notify Discord on Push
+name: Notify Discord Daily
 
 on:
-  push:
-    branches:
-      - main  # mainブランチへのプッシュをトリガーにする
+  schedule:
+    - cron: '30 2 * * *'  # 毎日 11:30 AM (JST) に通知
+    - cron: '30 8 * * *'  # 毎日 5:30 PM (JST) に通知
+    - cron: '27 5 * * *'  # 毎日 5:30 PM (JST) に通知
+  workflow_dispatch:  # 手動で実行するオプション（オプション）
 
 jobs:
   notify-discord:
     runs-on: ubuntu-latest
     steps:
-      - name: Send message to Discord
+      - name: Send message to Discord at 11:30 AM JST
         run: |
           curl -X POST -H "Content-Type: application/json" \
-          -d '{"content": "GitHubに新しい変更がプッシュされました！"}' \
+          -d '{"content": "11:30 AM の定期通知です。"}' \
+          ${{ secrets.DISCORD_WEBHOOK_URL }}
+
+      - name: Send message to Discord at 5:30 PM JST
+        run: |
+          curl -X POST -H "Content-Type: application/json" \
+          -d '{"content": "17:30 PM の定期通知です。"}' \
           ${{ secrets.DISCORD_WEBHOOK_URL }}
