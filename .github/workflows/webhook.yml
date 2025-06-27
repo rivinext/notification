@@ -15,23 +15,23 @@ jobs:
       - name: Send message to Discord at 11:30 AM JST
         run: |
           curl -X POST -H "Content-Type: application/json" \
-          -d '{"content": "<@737309371687763998> 11:30 AM の定期通知です。確認してください。"}' \
+          -d '{"content": "@everyone 11:30 AM の定期通知です。確認してください。"}' \
           ${{ secrets.DISCORD_WEBHOOK_URL }}
 
       - name: Send message to Discord at 5:30 PM JST
         run: |
           curl -X POST -H "Content-Type: application/json" \
-          -d '{"content": "<@737309371687763998> 17:30 PM の定期通知です。確認してください。"}' \
+          -d '{"content": "@everyone 17:30 PM の定期通知です。確認してください。"}' \
           ${{ secrets.DISCORD_WEBHOOK_URL }}
 
       - name: Send message to Discord at 17:47 PM JST
         run: |
           curl -X POST -H "Content-Type: application/json" \
-          -d '{"content": "<@737309371687763998> 17:47 PM の定期通知です。確認してください。"}' \
+          -d '{"content": "@everyone 17:47 PM の定期通知です。確認してください。"}' \
           ${{ secrets.DISCORD_WEBHOOK_URL }}
 
-      - name: Send message to Discord at 17:55 PM JST (everyone mention)
+      - name: Send message to Discord at 17:55 PM JST
         run: |
-        curl -X POST -H "Content-Type: application/json" \
-        -d '{"content": "@everyone 17:55 PM の定期通知です。確認してください。"}' \
-        ${{ secrets.DISCORD_WEBHOOK_URL }}
+          curl -X POST -H "Content-Type: application/json" \
+          -d '{"content": "@everyone 17:55 PM の定期通知です。確認してください。"}' \
+          ${{ secrets.DISCORD_WEBHOOK_URL }}
